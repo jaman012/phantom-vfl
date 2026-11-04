@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "name": "adult_income",
+  "output_name": "adult_census_income",
+  "files": {
+    "cleaned_csv": "02_adult_census_cleaned/adult_census_cleaned.csv",
+    "train_csv": "adult_census_train.csv"
+  },
+  "label": {
+    "column": "income",
+    "map": {"<=50K": 0, ">50K": 1},
+    "test_label_format": "text"
+  },
+  "integer_encoding": "fit_on_train",
+  "features": {
+    "native.country": {"type": "binary", "positive_value": "UNITED-STATES", "positive_name": "US", "negative_name": "Other"},
+    "workclass": {"type": "nominal"},
+    "education": {"type": "nominal"},
+    "marital.status": {"type": "nominal"},
+    "occupation": {"type": "nominal"},
+    "relationship": {"type": "nominal"},
+    "race": {"type": "nominal"},
+    "sex": {"type": "binary"},
+    "age": {"type": "continuous"},
+    "capital.net": {"type": "continuous"},
+    "hours.per.week": {"type": "continuous"}
+  },
+  "clients": [
+    ["age", "sex", "race", "capital.net", "hours.per.week"],
+    ["workclass", "occupation", "marital.status", "relationship", "education", "native.country"]
+  ],
+  "model_feature_order": [
+    "age", "capital.net", "hours.per.week", "sex",
+    "race", "workclass", "occupation", "marital.status", "relationship", "education",
+    "native.country"
+  ],
+  "output_text": {
+    "ground_truth_preprocessing": {"education_num": "DROPPED", "fnlwgt": "DROPPED", "native_country": "BINARIZED (US=1, Other=0)", "categoricals": "LabelEncoded"},
+    "model_purpose": "Isolated comparison: one-hot vs. label-encoding for multi-level categoricals",
+    "model_source_split": "{split_folder}/rs{seed}/split_indices (identical rows to real GT)"
+  }
+}

@@ -1,0 +1,13 @@
+# Python packages of Phantom VFL, pinned to the tested versions (Python 3.10).
+# Install: python -m pip install -r requirements.txt
+# Track B of the analysis also needs R and the R package emmeans (tested: R 4.6.1,
+# emmeans 2.0.4). Install them separately (RUNNING.md, section 3).
+numpy==2.2.5
+pandas==2.2.3
+scipy==1.15.3
+scikit-learn==1.5.0
+torch==2.6.0
+flwr[simulation]==1.23.0
+ray==2.31.0
+datasets==3.1.0
+tomli==2.2.1; python_version < "3.11"

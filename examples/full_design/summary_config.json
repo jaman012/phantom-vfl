@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "output_dir": "../../runs/full_design/summary",
+  "alpha": 0.05,
+  "variants": [
+    {
+      "label": "ai_ls",
+      "config": "adult_income_bce_ls.json"
+    },
+    {
+      "label": "ai_nls",
+      "config": "adult_income_bce_nls.json"
+    },
+    {
+      "label": "bm_pw_ls",
+      "config": "bank_marketing_weighted_bce_ls.json"
+    },
+    {
+      "label": "bm_pw_nls",
+      "config": "bank_marketing_weighted_bce_nls.json"
+    },
+    {
+      "label": "bm_fl_ls",
+      "config": "bank_marketing_focal_ls.json"
+    },
+    {
+      "label": "bm_fl_nls",
+      "config": "bank_marketing_focal_nls.json"
+    }
+  ]
+}

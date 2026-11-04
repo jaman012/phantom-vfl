@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "name": "bank_marketing",
+  "output_name": "bank_marketing",
+  "files": {
+    "cleaned_csv": "02_bank_marketing_cleaned/bank_marketing_cleaned.csv",
+    "train_csv": "bank_marketing_train.csv"
+  },
+  "label": {
+    "column": "label",
+    "map": {"0": 0, "1": 1},
+    "test_label_format": "numeric"
+  },
+  "integer_encoding": "pre_encoded",
+  "features": {
+    "age": {"type": "continuous"},
+    "balance": {"type": "continuous"},
+    "job": {"type": "nominal"},
+    "marital": {"type": "nominal"},
+    "education": {"type": "nominal"},
+    "housing": {"type": "binary"},
+    "loan": {"type": "binary"},
+    "month": {"type": "nominal"},
+    "campaign": {"type": "nominal"},
+    "pdays": {"type": "binary"},
+    "previous": {"type": "nominal"}
+  },
+  "clients": [
+    ["age", "job", "marital", "education", "housing"],
+    ["balance", "loan", "month", "campaign", "pdays", "previous"]
+  ],
+  "model_feature_order": [
+    "age", "balance", "housing", "loan", "pdays",
+    "job", "marital", "education", "month", "campaign", "previous"
+  ],
+  "output_text": {
+    "ground_truth_preprocessing": {"source": "bank_marketing_cleaned.csv", "note": "All preprocessing completed in cleaning script"},
+    "model_purpose": "Isolated comparison: one-hot vs. integer-coding for multi-level categoricals (BM)",
+    "model_source_split": "{split_folder}/rs{seed}/split_indices (identical rows to the integer-coded ground truth)"
+  }
+}

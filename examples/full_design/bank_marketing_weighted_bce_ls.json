@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "generation": {
+    "dataset_config": "../../datasets/bank_marketing/dataset.json",
+    "data_dir": "../../runs/full_design/bank_marketing_ls",
+    "seeds": [
+      42,
+      50,
+      58,
+      66,
+      74,
+      82,
+      90,
+      98,
+      106,
+      114
+    ],
+    "label_sharing": true,
+    "k_levels": [
+      "kstar",
+      5,
+      10,
+      15,
+      20,
+      25,
+      30,
+      35,
+      40
+    ]
+  },
+  "data_preparation": {
+    "test_share": 0.2,
+    "validation_share": 0.0
+  },
+  "training": {
+    "seeds": [
+      42,
+      50,
+      58,
+      66,
+      74,
+      82,
+      90,
+      98,
+      106,
+      114
+    ],
+    "feature_form": "model",
+    "run_config": {
+      "num-server-rounds": 250,
+      "loss-type": "weighted_bce",
+      "learning-rate": 0.000485
+    }
+  },
+  "analysis": {}
+}

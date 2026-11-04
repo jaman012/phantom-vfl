@@ -1,0 +1,62 @@
+# Modified by James Mansueto, 2026.
+# Based on pyproject.toml of the Flower example examples/vertical-fl
+# (https://github.com/adap/flower, Apache License 2.0; main branch after the
+# v1.25.0 release, code identical to tag v1.26.0). Changes: see MODIFICATIONS.md.
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vertical-fl"
+version = "2.0.0"
+description = "Phantom VFL training with Flower (based on the Flower vertical-fl example)"
+license = "Apache-2.0"
+# The tested versions, pinned: the same pins as requirements.txt at the code
+# root. 'flwr run' does not check this list.
+dependencies = [
+    "flwr[simulation]==1.23.0",
+    "ray==2.31.0",
+    "numpy==2.2.5",
+    "pandas==2.2.3",
+    "scikit-learn==1.5.0",
+    "torch==2.6.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.flwr.app]
+publisher = "James Mansueto"
+
+[tool.flwr.app.components]
+serverapp = "vertical_fl.server_app:app"
+clientapp = "vertical_fl.client_app:app"
+
+# Default values. The runner of the framework passes the values of each run with
+# 'flwr run . --run-config "key=value ..."'.
+[tool.flwr.app.config]
+num-server-rounds = 250
+learning-rate = 0.01            # learning rate of the client models (the head model uses 0.01)
+out-feature-dim-clientapp = 64  # embedding width of each client
+# Data of the run
+data-dir = ""                   # data folder of the dataset (required)
+dataset-config = ""             # path of dataset.json (required)
+phantom-dataset = "k0"          # k folder: k0 (k*), k5 ... k40, or ground_truth
+random-seed = 42                # seed of the split and of the start weights of the models
+# Number of features of each client. The sum must equal the number of features in
+# dataset.json; the client models take their input width from the data files.
+feature-splits = "5,6"
+# Loss of the head model: "bce", "weighted_bce", "focal" or "class_balanced"
+loss-type = "bce"
+focal-alpha = 0.80              # focal: weight of the positive class
+focal-gamma = 2.0               # focal: focusing value
+cb-beta = 0.9999                # class_balanced: beta
+# Results folder <data-dir>/06_flower_vfl_results/<results-tag>/...; empty: the loss type
+results-tag = ""
+
+[tool.flwr.federations]
+default = "local-simulation"
+
+[tool.flwr.federations.local-simulation]
+options.num-supernodes = 2      # one node for each client of dataset.json
